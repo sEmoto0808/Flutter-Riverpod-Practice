@@ -29,9 +29,13 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appName = ref.watch(appNameProvider);
+    final appNameBody = ref.watch(appNameBodyProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(appName),
+      ),
+      body: Center(
+        child: Text(appNameBody),
       ),
     );
   }
