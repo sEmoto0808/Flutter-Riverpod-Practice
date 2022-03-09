@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_practice/provider/app_name_provider.dart';
 
 void main() {
   runApp(
@@ -27,6 +28,11 @@ class MyHomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold();
+    final appName = ref.watch(appNameProvider);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(appName),
+      ),
+    );
   }
 }
