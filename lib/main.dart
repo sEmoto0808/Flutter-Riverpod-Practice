@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_practice/provider/app_name_provider.dart';
+import 'package:flutter_riverpod_practice/provider/counter_provider.dart';
 
 void main() {
   runApp(
@@ -30,12 +31,25 @@ class MyHomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final appName = ref.watch(appNameProvider);
     final appNameBody = ref.watch(appNameBodyProvider);
+
+    final count = ref.watch(counterProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text(appName),
       ),
       body: Center(
-        child: Text(appNameBody),
+        child: Column(
+          children: [
+            Text(appNameBody),
+            Text(count.toString()),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          ref.watch(counterProvider.notifier).state++;
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }
