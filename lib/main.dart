@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_practice/login_page.dart';
 import 'package:flutter_riverpod_practice/provider/app_name_provider.dart';
 import 'package:flutter_riverpod_practice/provider/counter_provider.dart';
+import 'package:flutter_riverpod_practice/state/login_state.dart';
 
 void main() {
   runApp(
@@ -9,17 +11,18 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final user = ref.watch(userProvider);
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(),
+      home: user == null ? const LoginPage() : const MyHomePage(),
     );
   }
 }
