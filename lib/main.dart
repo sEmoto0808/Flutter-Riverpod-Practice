@@ -22,7 +22,7 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: user == null ? const LoginPage() : const MyHomePage(),
+      home: user == null ? LoginPage() : const MyHomePage(),
     );
   }
 }

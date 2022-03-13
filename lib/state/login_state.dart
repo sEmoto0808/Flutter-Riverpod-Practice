@@ -11,7 +11,25 @@ final emailProvider = StateProvider.autoDispose((ref) {
   return '';
 });
 
+/// メールアドレス(Error)の受け渡しを行うためのProvider
+final emailErrorProvider = StateProvider.autoDispose((ref) {
+  final email = ref.watch(emailProvider);
+  if (email.isEmpty) {
+    return 'メールアドレスを入力してください';
+  }
+  return '';
+});
+
 /// パスワードの受け渡しを行うためのProvider
 final passwordProvider = StateProvider.autoDispose((ref) {
+  return '';
+});
+
+/// パスワード(Error)の受け渡しを行うためのProvider
+final passwordErrorProvider = StateProvider.autoDispose((ref) {
+  final password = ref.watch(passwordProvider);
+  if (password.isEmpty) {
+    return 'パスワードを入力してください';
+  }
   return '';
 });
