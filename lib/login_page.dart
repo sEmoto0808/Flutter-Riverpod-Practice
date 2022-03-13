@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_practice/main.dart';
+import 'package:flutter_riverpod_practice/state/login_state.dart';
+import 'package:flutter_riverpod_practice/state/user_entity.dart';
 
 /// ログイン画面
 class LoginPage extends ConsumerWidget {
@@ -25,7 +28,15 @@ class LoginPage extends ConsumerWidget {
             const SizedBox(height: 25),
             Align(
               child: TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  ref.watch(userProvider.notifier).state =
+                      const UserEntity('User1');
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MyHomePage()),
+                    (Route<dynamic> route) => false,
+                  );
+                },
                 child: const Text('Login'),
               ),
             ),
