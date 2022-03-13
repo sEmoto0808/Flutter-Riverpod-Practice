@@ -7,6 +7,32 @@ class LoginPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Scaffold();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Login'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 50),
+            const Text('Email'),
+            TextField(),
+            const SizedBox(height: 25),
+            const Text('Password'),
+            TextField(),
+            const SizedBox(height: 25),
+            Align(
+              child: TextButton(
+                onPressed: () {},
+                child: const Text('Login'),
+              ),
+            ),
+            const SizedBox(height: 50),
+          ],
+        ),
+      ),
+    );
   }
 }
