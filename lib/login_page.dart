@@ -34,12 +34,12 @@ class LoginPage extends ConsumerWidget {
               },
             ),
             Visibility(
-              visible: emailError.isNotEmpty,
+              visible: emailError.type  == LoginStateType.error,
               maintainAnimation: true,
               maintainSize: true,
               maintainState: true,
               child: Text(
-                emailError,
+                emailError.errorMessage ?? '',
                 style: Theme.of(context)
                     .textTheme
                     .caption
@@ -55,12 +55,12 @@ class LoginPage extends ConsumerWidget {
               },
             ),
             Visibility(
-              visible: passwordError.isNotEmpty,
+              visible: passwordError.type == LoginStateType.error,
               maintainAnimation: true,
               maintainSize: true,
               maintainState: true,
               child: Text(
-                passwordError,
+                passwordError.errorMessage ?? '',
                 style: Theme.of(context)
                     .textTheme
                     .caption
@@ -70,16 +70,28 @@ class LoginPage extends ConsumerWidget {
             const SizedBox(height: 25),
             Align(
               child: TextButton(
-                onPressed: () {
+                onPressed: () async {
                   if (!canLogin()) return;
 
-                  ref.watch(userProvider.notifier).state =
+                  final repository = ref.watch(loginRepositoryProvider);
+                  final loginState = await repository.getUser();
+
+                  switch (loginState.type) {
+                    case LoginStateType.success:
+                      ref.watch(userProvider.notifier).state =
                       const UserEntity('User1');
-                  Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const MyHomePage()),
-                    (Route<dynamic> route) => false,
-                  );
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (context) => const MyHomePage()),
+                            (Route<dynamic> route) => false,
+                      );
+                      break;
+                    case LoginStateType.error:
+                      // TODO toast出す
+                      break;
+                    default:
+                      break;
+                  }
                 },
                 child: const Text('Login'),
               ),

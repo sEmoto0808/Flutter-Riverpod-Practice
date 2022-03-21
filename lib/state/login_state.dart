@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod_practice/repository/login_repository.dart';
 import 'package:flutter_riverpod_practice/state/user_entity.dart';
 
 /// 擬似的にユーザーログインの状態管理をするための[Provider]を定義
@@ -33,6 +34,8 @@ final passwordErrorProvider = StateProvider.autoDispose((ref) {
   }
   return const LoginState.initialized();
 });
+
+final loginRepositoryProvider = Provider.autoDispose((ref) => LoginRepository());
 
 class LoginState {
   final LoginStateType type;
