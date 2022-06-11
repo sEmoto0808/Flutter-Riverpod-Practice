@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_practice/login_page.dart';
 import 'package:flutter_riverpod_practice/provider/app_name_provider.dart';
 import 'package:flutter_riverpod_practice/provider/counter_provider.dart';
-import 'package:flutter_riverpod_practice/state/login_state.dart';
 import 'package:flutter_riverpod_practice/state/user_entity.dart';
 
 void main() {
@@ -24,6 +24,7 @@ class MyApp extends ConsumerWidget {
         primarySwatch: Colors.blue,
       ),
       home: user == null ? LoginPage() : const MyHomePage(),
+      builder: EasyLoading.init(),
     );
   }
 }

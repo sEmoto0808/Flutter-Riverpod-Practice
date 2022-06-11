@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_practice/main.dart';
 import 'package:flutter_riverpod_practice/state/login_state.dart';
@@ -74,9 +75,6 @@ class LoginPage extends ConsumerWidget {
                 onPressed: () async {
                   if (!canLogin()) return;
 
-                  // final repository = ref.watch(loginRepositoryProvider);
-                  // final loginState = await repository.getUser();
-
                   final loginViewModel = ref.watch(loginStateNotifierProvider.notifier);
                   await loginViewModel.login();
 
@@ -91,7 +89,7 @@ class LoginPage extends ConsumerWidget {
                       );
                       break;
                     case LoginStateType.error:
-                      // TODO toast出す
+                      EasyLoading.showToast('Failed with Error');
                       break;
                     default:
                       break;

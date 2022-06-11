@@ -9,7 +9,7 @@ final loginRepositoryProvider =
 
 class LoginRepository {
   Future<LoginState> getUser() async {
-    await Future<void>.delayed(const Duration(seconds: 3));
+    await Future<void>.delayed(const Duration(seconds: 1));
 
     final randomInt = Random().nextInt(1);
     switch (randomInt % 2) {
