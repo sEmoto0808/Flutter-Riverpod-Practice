@@ -15,6 +15,7 @@ class LoginPage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final emailError = ref.watch(emailErrorProvider);
     final passwordError = ref.watch(passwordErrorProvider);
+    final currentLoginState = ref.watch(loginStateNotifierProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -73,10 +74,13 @@ class LoginPage extends ConsumerWidget {
                 onPressed: () async {
                   if (!canLogin()) return;
 
-                  final repository = ref.watch(loginRepositoryProvider);
-                  final loginState = await repository.getUser();
+                  // final repository = ref.watch(loginRepositoryProvider);
+                  // final loginState = await repository.getUser();
 
-                  switch (loginState.type) {
+                  final loginViewModel = ref.watch(loginStateNotifierProvider.notifier);
+                  await loginViewModel.login();
+
+                  switch (currentLoginState.type) {
                     case LoginStateType.success:
                       ref.watch(userProvider.notifier).state =
                       const UserEntity('User1');

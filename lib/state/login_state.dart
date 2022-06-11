@@ -35,7 +35,8 @@ final passwordErrorProvider = StateProvider.autoDispose((ref) {
   return const LoginState.initialized();
 });
 
-final loginRepositoryProvider = Provider.autoDispose((ref) => LoginRepository());
+final loginRepositoryProvider =
+    Provider.autoDispose((ref) => LoginRepository());
 
 class LoginState {
   final LoginStateType type;
@@ -63,4 +64,28 @@ enum LoginStateType {
   initialized,
   success,
   error,
+}
+
+final loginStateNotifierProvider =
+    StateNotifierProvider<LoginStateNotifier, LoginState>(
+  (ref) => LoginStateNotifier(ref),
+);
+
+class LoginStateNotifier extends StateNotifier<LoginState> {
+  /// 他のProviderへの参照
+  final Ref ref;
+
+  LoginStateNotifier(this.ref) : super(const LoginState.initialized());
+
+  /// ログイン
+  Future<void> login() async {
+    final repository = ref.read(loginRepositoryProvider);
+    final currentState = await repository.getUser();
+    state = currentState;
+  }
+
+  /// ログアウト
+  void logout() {
+    state = const LoginState.initialized();
+  }
 }
