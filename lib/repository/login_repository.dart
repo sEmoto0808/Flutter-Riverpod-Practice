@@ -1,10 +1,13 @@
 import 'dart:math';
 
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_riverpod_practice/state/login_state.dart';
 import 'package:flutter_riverpod_practice/state/user_entity.dart';
 
-class LoginRepository {
+final loginRepositoryProvider =
+    Provider.autoDispose((ref) => LoginRepository());
 
+class LoginRepository {
   Future<LoginState> getUser() async {
     await Future<void>.delayed(const Duration(seconds: 3));
 
