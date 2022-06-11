@@ -35,7 +35,7 @@ class MyHomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final appName = ref.watch(appNameProvider);
-    final appNameBody = ref.watch(appNameBodyProvider);
+    final user = ref.watch(userProvider);
 
     final count = ref.watch(counterProvider);
     return Scaffold(
@@ -44,8 +44,9 @@ class MyHomePage extends ConsumerWidget {
       ),
       body: Center(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(appNameBody),
+            Text('User Name: ' + (user?.name ?? '')),
             Text(count.toString()),
           ],
         ),

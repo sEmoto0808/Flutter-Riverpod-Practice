@@ -78,6 +78,8 @@ class LoginStateNotifier extends StateNotifier<LoginState> {
     final repository = ref.read(loginRepositoryProvider);
     final currentState = await repository.getUser();
     state = currentState;
+
+    ref.watch(userProvider.notifier).state = const UserEntity('User1');
   }
 
   /// ログアウト

@@ -80,8 +80,6 @@ class LoginPage extends ConsumerWidget {
 
                   switch (currentLoginState.type) {
                     case LoginStateType.success:
-                      ref.watch(userProvider.notifier).state =
-                      const UserEntity('User1');
                       Navigator.pushAndRemoveUntil(
                         context,
                         MaterialPageRoute(builder: (context) => const MyHomePage()),
